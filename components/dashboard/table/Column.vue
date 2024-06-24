@@ -26,10 +26,13 @@ defineProps<Props>()
     width: 100%;
 
     &__title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 10px;
         border: 1px solid $black;
         border-radius: 10px;
-        padding: 10px 0;
+        padding: 10px;
     }
 
     &__card {
