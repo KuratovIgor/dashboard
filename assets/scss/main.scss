@@ -1,3 +1,18 @@
-h1 {
-    color: $primary;
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.default-container {
+    display: flex;
+}
+
+.page-container {
+    height: 100vh;
+    width: 100%;
+    padding: 30px;
 }
