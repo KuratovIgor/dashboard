@@ -2,13 +2,15 @@
     <div>
         <h1>Dashboard</h1>
 
-        <DashboardTable v-if="dashboardColumns && dashboardColumns.length" :columns="dashboardColumns" />
+         <DashboardTable v-if="dashboardStore.dashboardColumns && dashboardStore.dashboardColumns.length" :columns="dashboardStore.dashboardColumns" />
         <div v-else>Empty dashboard</div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { DashboardService } from '@/services/dashboard.service'
+import { useDashboardStore } from '@/stores/dashboard.store'
 
-const { data: dashboardColumns } = await DashboardService.getDashboardColumns()
+const dashboardStore = useDashboardStore()
+
+await dashboardStore.getDashboardColumns()    
 </script>
