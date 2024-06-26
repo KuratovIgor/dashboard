@@ -24,6 +24,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
             loading.value = true
 
             await DashboardService.updateDashboardColumns(body)
+            dashboardColumns.value = await DashboardService.getDashboardColumns()
         } catch {
             // handle error
         } finally {

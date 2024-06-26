@@ -1,7 +1,7 @@
 <template>
     <div
         class="dashboard-column"
-        @drop="handleDragDrop($event, column)"
+        @drop="handleDragDrop"
         @dragover.prevent
         @dragenter.prevent
     >
@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { DashboardService } from '@/services/dashboard.service'
 import { useDashboardStore } from '@/stores/dashboard.store'
 import type { DashboardColumnType, DashboardCardType, DashboardColumnUpdateType } from '@/types/dashboard.types'
 
@@ -46,7 +45,7 @@ const handleDragStart = (event: DragEvent, item: DashboardCardType): void => {
     event.dataTransfer.setData('itemId', JSON.stringify(transferCard))
 }
 
-const handleDragDrop = async (event: DragEvent, column: DashboardColumnType): Promise<void> => {
+const handleDragDrop = async (event: DragEvent): Promise<void> => {
     if (!event.dataTransfer) return
 
     const item: TransferCardType = JSON.parse(event.dataTransfer.getData('itemId'))
@@ -55,8 +54,6 @@ const handleDragDrop = async (event: DragEvent, column: DashboardColumnType): Pr
         ...item,
         columnTo: props.column.id,
     })
-
-    await dashboardStore.getDashboardColumns()
 }
 </script>
 

@@ -18,4 +18,7 @@ export default defineNuxtConfig({
   imports: {
     autoImport: false,
   },
+  // routeRules: {
+  //   '/dashboard/**': { ssr: false },
+  // },
 })
