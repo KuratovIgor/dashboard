@@ -1,9 +1,9 @@
 import { defineEventHandler, readBody } from '#imports'
-import type { DashboardColumnUpdateType } from '@/types/dashboard.types'
-import { postDashboardMock } from './dashboard.mock'
+import type { DashboardCardPositionType } from '@/types/dashboard.types'
+import DashboardController from '@/server/controllers/dashboard.controller'
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody<DashboardColumnUpdateType>(event)
-    
-    await postDashboardMock(body)
+    const body = await readBody<DashboardCardPositionType>(event)
+
+    await DashboardController.updateTaskCard(event, body)
 })

@@ -1,9 +1,7 @@
 import { defineEventHandler } from '#imports'
 import type { DashboardColumnType } from '@/types/dashboard.types'
-import { getDashboardMock } from './dashboard.mock'
+import DashboardController from '@/server/controllers/dashboard.controller'
 
-export default defineEventHandler(async (): Promise<DashboardColumnType[]> => {
-    const dashboardColumns = await getDashboardMock()
-
-    return dashboardColumns
+export default defineEventHandler(async (event): Promise<DashboardColumnType[]> => {
+    return await DashboardController.getDashboardColumns(event)
 })

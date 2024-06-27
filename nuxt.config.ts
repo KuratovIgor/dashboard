@@ -11,14 +11,16 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: [
-    '@element-plus/nuxt',
-    '@pinia/nuxt',
-  ],
+  modules: ['@element-plus/nuxt', '@pinia/nuxt', "@nuxtjs/supabase"],
   imports: {
     autoImport: false,
   },
-  // routeRules: {
-  //   '/dashboard/**': { ssr: false },
-  // },
+  supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+    redirectOptions: {
+      login: '/',
+      callback: '/dashboard',
+    },
+  },
 })

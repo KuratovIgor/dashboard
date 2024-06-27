@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { DashboardColumnType, DashboardColumnUpdateType } from '@/types/dashboard.types'
+import type { DashboardColumnType, DashboardCardPositionType } from '@/types/dashboard.types'
 import { DashboardService } from '@/services/dashboard.service'
 
 export const useDashboardStore = defineStore('dashboardStore', () => {
@@ -19,11 +19,11 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
         }
     }
 
-    const updateDashboardColumns = async (body: DashboardColumnUpdateType): Promise<void> => {
+    const updateDashboardColumns = async (cardPosition: DashboardCardPositionType): Promise<void> => {
         try {
             loading.value = true
 
-            await DashboardService.updateDashboardColumns(body)
+            await DashboardService.updateDashboardColumns(cardPosition)
             dashboardColumns.value = await DashboardService.getDashboardColumns()
         } catch {
             // handle error

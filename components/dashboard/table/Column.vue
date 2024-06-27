@@ -20,9 +20,7 @@
 
 <script setup lang="ts">
 import { useDashboardStore } from '@/stores/dashboard.store'
-import type { DashboardColumnType, DashboardCardType, DashboardColumnUpdateType } from '@/types/dashboard.types'
-
-type TransferCardType = Omit<DashboardColumnUpdateType, 'columnTo'>
+import type { DashboardColumnType, DashboardCardType } from '@/types/dashboard.types'
 
 interface Props {
     column: DashboardColumnType
@@ -35,24 +33,19 @@ const dashboardStore = useDashboardStore()
 const handleDragStart = (event: DragEvent, item: DashboardCardType): void => {
     if (!event.dataTransfer) return
 
-    const transferCard: TransferCardType = {
-        columnFrom: props.column.id,
-        cardId: item.id,
-    }
-
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'move'
-    event.dataTransfer.setData('itemId', JSON.stringify(transferCard))
+    event.dataTransfer.setData('itemId', item.id)
 }
 
 const handleDragDrop = async (event: DragEvent): Promise<void> => {
     if (!event.dataTransfer) return
 
-    const item: TransferCardType = JSON.parse(event.dataTransfer.getData('itemId'))
+    const cardId = event.dataTransfer.getData('itemId')
 
     await dashboardStore.updateDashboardColumns({
-        ...item,
-        columnTo: props.column.id,
+        cardId,
+        columnId: props.column.id,
     })
 }
 </script>

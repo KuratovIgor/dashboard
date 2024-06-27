@@ -4,14 +4,13 @@ export type DashboardColumnType = {
     cards: DashboardCardType[]
 }
 
-export type DashboardColumnUpdateType = {
-    columnFrom: string
-    columnTo: string
+export type DashboardCardPositionType = {
+    columnId: DashboardCardType['id']
     cardId: DashboardCardType['id']
 }
 
 export type DashboardCardType = {
     id: string
-    name: string
+    title: string
     description: string
 }
