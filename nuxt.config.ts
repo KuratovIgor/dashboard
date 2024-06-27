@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: ['@element-plus/nuxt', '@pinia/nuxt', "@nuxtjs/supabase"],
+  modules: ['@pinia/nuxt', "@nuxtjs/supabase", "@nuxt/ui"],
   imports: {
     autoImport: false,
   },

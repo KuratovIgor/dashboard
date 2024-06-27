@@ -1,12 +1,12 @@
 <template>
     <NuxtLink :to="{ path: cardRouterPath }" class="dashboard-card">
-        <el-card shadow="hover">
+        <UCard>
             <template #header>
-                <div class="card-header">{{ card.title }}</div>
+                {{ card.title }}
             </template>
 
-            <div class="text item">{{ card.description }}</div>
-    </el-card>
+            <div>{{ card.description }}</div>
+        </UCard>
     </NuxtLink>
 </template>
 

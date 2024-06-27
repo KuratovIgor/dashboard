@@ -62,6 +62,7 @@ const handleDragDrop = async (event: DragEvent): Promise<void> => {
         border: 1px solid $black;
         border-radius: 10px;
         padding: 10px;
+        background-color: rgb(31 41 55);
     }
 
     &__card {

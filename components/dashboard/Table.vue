@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="dashboardStore.loading" class="dashboard-table">
+    <div class="dashboard-table">
         <DashboardTableColumn v-for="(column, index) in columns" :key="index" :column="column" />
     </div>
 </template>
