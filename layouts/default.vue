@@ -19,9 +19,21 @@ const links = [{
 </script>
 
 <style lang="scss" scoped>
+.default-container {
+    display: flex;
+}
+
 .sidebar {
     padding: 10px;
     width: 100%;
     max-width: 250px;
+}
+
+.page-container {
+    height: 100vh;
+    width: 100%;
+    padding: 30px;
+    overflow: auto;
+    transition: 0.1s linear;
 }
 </style>
