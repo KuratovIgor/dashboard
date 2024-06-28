@@ -1,4 +1,3 @@
-import { defineEventHandler } from '#imports'
 import type { DashboardColumnType } from '@/types/dashboard.types'
 import DashboardController from '@/server/controllers/dashboard.controller'
 

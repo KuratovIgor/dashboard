@@ -11,19 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const links = [{
     label: 'Dashboard',
     icon: 'i-heroicons-squares-2x2-solid',
     to: '/dashboard'
   }]
-
-const activeIndex = ref('1');
-
-const handleMenuTabOpen = (key: string) => {
-  activeIndex.value = key
-}
 </script>
 
 <style lang="scss" scoped>

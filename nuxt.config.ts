@@ -12,9 +12,6 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@pinia/nuxt', "@nuxtjs/supabase", "@nuxt/ui"],
-  imports: {
-    autoImport: false,
-  },
   supabase: {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,

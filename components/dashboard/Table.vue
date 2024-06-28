@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { useDashboardStore } from '#imports'
 import type { DashboardColumnType } from '@/types/dashboard.types'
 
 interface Props {

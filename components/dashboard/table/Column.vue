@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { useDashboardStore } from '@/stores/dashboard.store'
 import type { DashboardColumnType, DashboardCardType } from '@/types/dashboard.types'
 
 interface Props {

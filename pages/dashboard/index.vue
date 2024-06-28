@@ -8,8 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { useDashboardStore } from '@/stores/dashboard.store'
-
 const dashboardStore = useDashboardStore()
 
 await dashboardStore.getDashboardColumns()

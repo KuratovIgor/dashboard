@@ -1,4 +1,3 @@
-import { defineEventHandler, readBody } from '#imports'
 import type { DashboardCardPositionType } from '@/types/dashboard.types'
 import DashboardController from '@/server/controllers/dashboard.controller'
 
