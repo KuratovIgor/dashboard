@@ -2,7 +2,7 @@
     <UModal v-model="modelValue">
         <UCard>
             <template #header>
-                <h1>Edit Dashboard Card #{{ card?.id }}</h1>
+                <h1>Edit Dashboard Card</h1>
             </template>
 
             <UForm class="dashboard-form" :state="cardState" @submit="handleFormSubmit">
@@ -36,7 +36,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const modelValue = defineModel()
+const modelValue = defineModel<boolean>()
 
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()

@@ -23,7 +23,8 @@
         </div>
     </div>
 
-    <DashboardCardModal v-model="editModalActive" :card="editCard" />
+    <DashboardCardEditModal v-model="editModalActive" :card="editedCard" />
+    <DashboardCardRemoveModal v-model="removeModalActive" :card-id="removedCardId" />
 </template>
 
 <script setup lang="ts">
@@ -37,9 +38,17 @@ defineProps<Props>()
 
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
+const toast = useToast()
 
-const editCard = ref<DashboardCardType | null>(null)
+const editedCard = ref<DashboardCardType | null>(null)
+const removedCardId = ref<DashboardCardType['id']>('')
 const editModalActive = ref(false)
+const removeModalActive = ref(false)
+
+const removeCard = async (cardId: DashboardCardType['id']): Promise<void> => {
+    await dashboardCardStore.removeCard(cardId)
+    await dashboardStore.getDashboardColumns()
+}
 
 const handleDragStart = (event: DragEvent, card: DashboardCardType): void => {
     if (!event.dataTransfer) return
@@ -61,13 +70,13 @@ const handleDragDrop = async (event: DragEvent, column: DashboardColumnType): Pr
 }
 
 const handleCardEdit = (card: DashboardCardType): void => {
-    editCard.value = card
+    editedCard.value = card
     editModalActive.value = true
 }
 
-const handleCardRemove = async (cardId: DashboardCardType['id']): Promise<void> => {
-    await dashboardCardStore.removeCard(cardId)
-    await dashboardStore.getDashboardColumns()
+const handleCardRemove = (cardId: DashboardCardType['id']): void => {
+    removeModalActive.value = true
+    removedCardId.value = cardId
 }
 </script>
 
