@@ -17,18 +17,20 @@
                 class="dashboard-table__card"
                 draggable="true"
                 @dragstart="handleDragStart($event, card)"
-                @edit="handleCardEdit"
-                @remove="handleCardRemove"
+                @edit="handleEditModalOpen"
+                @remove="handleRemoveModalOpen"
             />
         </div>
     </div>
 
-    <DashboardCardEditModal v-model="editModalActive" :card="editedCard" />
-    <DashboardCardRemoveModal v-model="removeModalActive" :card-id="removedCardId" />
+    <DashboardCardEditModal ref="cardEditModalRef" />
+    <DashboardCardRemoveModal ref="cardRemoveModalRef" />
 </template>
 
 <script setup lang="ts">
-import type { DashboardColumnType, DashboardCardType } from '@/types/dashboard.types'
+import type { DashboardCardEditModal, DashboardCardRemoveModal } from '#build/components';
+import { useDashboardDrag } from '@/composables/useDashboardDrag';
+import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
 
 interface Props {
     columns: DashboardColumnType[]
@@ -38,45 +40,18 @@ defineProps<Props>()
 
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
-const toast = useToast()
 
-const editedCard = ref<DashboardCardType | null>(null)
-const removedCardId = ref<DashboardCardType['id']>('')
-const editModalActive = ref(false)
-const removeModalActive = ref(false)
+const { handleDragStart, handleDragDrop } = useDashboardDrag()
 
-const removeCard = async (cardId: DashboardCardType['id']): Promise<void> => {
-    await dashboardCardStore.removeCard(cardId)
-    await dashboardStore.getDashboardColumns()
+const cardEditModalRef = ref<InstanceType<typeof DashboardCardEditModal> | null>(null)
+const cardRemoveModalRef = ref<InstanceType<typeof DashboardCardRemoveModal> | null>(null)
+
+const handleEditModalOpen = (card: DashboardCardType): void => {
+    cardEditModalRef.value?.open(card)
 }
 
-const handleDragStart = (event: DragEvent, card: DashboardCardType): void => {
-    if (!event.dataTransfer) return
-
-    event.dataTransfer.dropEffect = 'move'
-    event.dataTransfer.effectAllowed = 'move'
-    event.dataTransfer.setData('itemId', card.id)
-}
-
-const handleDragDrop = async (event: DragEvent, column: DashboardColumnType): Promise<void> => {
-    if (!event.dataTransfer) return
-
-    const cardId = event.dataTransfer.getData('itemId')
-
-    await dashboardStore.updateDashboardColumns({
-        cardId,
-        columnId: column.id,
-    })
-}
-
-const handleCardEdit = (card: DashboardCardType): void => {
-    editedCard.value = card
-    editModalActive.value = true
-}
-
-const handleCardRemove = (cardId: DashboardCardType['id']): void => {
-    removeModalActive.value = true
-    removedCardId.value = cardId
+const handleRemoveModalOpen = (cardId: DashboardCardType['id']): void => {
+    cardRemoveModalRef.value?.open(cardId)
 }
 </script>
 

@@ -31,11 +31,6 @@
 <script setup lang="ts">
 import type { DashboardCardType } from '@/types/dashboard.types'
 
-interface Props {
-    card: DashboardCardType | null
-}
-
-const props = defineProps<Props>()
 const modelValue = defineModel<boolean>()
 
 const dashboardStore = useDashboardStore()
@@ -47,16 +42,12 @@ const cardState = reactive<DashboardCardType>({
     description: ''
 })
 
-watch(() => modelValue.value, (isActive) => {
-    if (isActive) {
-        setDashboardCard()
-    }
-})
+const open = (card: DashboardCardType): void => {
+    modelValue.value = true
 
-const setDashboardCard = (): void => {
-    cardState.id = props.card?.id || ''
-    cardState.title = props.card?.title || ''
-    cardState.description = props.card?.description || ''
+    cardState.id = card.id || ''
+    cardState.title = card.title || ''
+    cardState.description = card.description || ''
 }
 
 const handleFormSubmit = async (): Promise<void> => {
@@ -66,6 +57,10 @@ const handleFormSubmit = async (): Promise<void> => {
 
     await dashboardStore.getDashboardColumns()
 }
+
+defineExpose({
+    open,
+})
 </script>
 
 <style lang="scss" scoped>

@@ -1,30 +1,33 @@
 <template>
-    <NuxtLink :to="{ path: cardRouterPath }" class="dashboard-card">
+    <NuxtLink class="dashboard-card">
         <UCard>
             <template #header>
                 <div class="dashboard-card__header">
                     <div>{{ card.title }}</div>
 
                     <UPopover mode="hover">
-                        <UButton variant="link" color="black">. . .</UButton>
+                        <UButton
+                            variant="link"
+                            color="black" 
+                            icon="i-heroicons-ellipsis-horizontal-solid"
+                        />
 
                         <template #panel>
                             <div class="dashboard-card__popover">
                                 <UButton
                                     icon="i-heroicons-pencil-square"
-                                    size="xl"
                                     color="amber"
-                                    square
+                                    size="xl"
                                     variant="link"
                                     @click="handleCardEdit"
                                 >
                                     Edit
                                 </UButton>
+
                                 <UButton
                                     icon="i-heroicons-pencil-square"
-                                    size="xl"
                                     color="red"
-                                    square
+                                    size="xl"
                                     variant="link"
                                     @click="handleCardRemove"
                                 >
@@ -44,8 +47,6 @@
 <script setup lang="ts">
 import type { DashboardCardType } from '@/types/dashboard.types'
 
-const route = useRoute()
-
 interface Props {
     card: DashboardCardType
 }
@@ -57,8 +58,6 @@ type Emits = {
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
-
-const cardRouterPath = computed(() => `${route.path}/${props.card.id}`)
 
 const handleCardEdit = (): void => {
     emit('edit', props.card)

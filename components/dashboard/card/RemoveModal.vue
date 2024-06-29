@@ -30,18 +30,20 @@
 <script setup lang="ts">
 import type { DashboardCardType } from '@/types/dashboard.types'
 
-interface Props {
-    cardId: DashboardCardType['id']
-}
-
-const props = defineProps<Props>()
 const modelValue = defineModel<boolean>()
 
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
+let dashboardCardId: DashboardCardType['id'] = ''
+
+const open = (cardId: DashboardCardType['id']): void => {
+    modelValue.value = true
+    dashboardCardId = cardId
+}
+
 const handleRemovingConfirm = async (): Promise<void> => {
-    await dashboardCardStore.removeCard(props.cardId)
+    await dashboardCardStore.removeCard(dashboardCardId)
 
     modelValue.value = false
 
@@ -51,6 +53,10 @@ const handleRemovingConfirm = async (): Promise<void> => {
 const handleModalClose = (): void => {
     modelValue.value = false
 }
+
+defineExpose({
+    open,
+})
 </script>
 
 <style lang="scss" scoped>
