@@ -1,4 +1,3 @@
-import { DashboardService } from '@/services/dashboard.service'
 import { DashboardCardService } from '@/services/dashboardCard.service'
 import type { DashboardCardType } from '@/types/dashboard.types'
 
@@ -18,8 +17,21 @@ export const useDashboardCardStore = defineStore('dashboardCard', () => {
         }
     }
 
+    const removeCard = async (cardId: DashboardCardType['id']): Promise<void> => {
+        try {
+            loading.value = true
+
+            await DashboardCardService.removeCard(cardId)
+        } catch {
+            // handle error
+        } finally {
+            loading.value = false
+        }
+    }
+
     return {
         loading,
         editCard,
+        removeCard,
     }
 })

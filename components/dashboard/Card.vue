@@ -9,16 +9,26 @@
                         <UButton variant="link" color="black">. . .</UButton>
 
                         <template #panel>
-                            <div>
+                            <div class="dashboard-card__popover">
                                 <UButton
                                     icon="i-heroicons-pencil-square"
                                     size="xl"
                                     color="amber"
                                     square
                                     variant="link"
-                                    @click="handleCardModalOpen"
+                                    @click="handleCardEdit"
                                 >
                                     Edit
+                                </UButton>
+                                <UButton
+                                    icon="i-heroicons-pencil-square"
+                                    size="xl"
+                                    color="red"
+                                    square
+                                    variant="link"
+                                    @click="handleCardRemove"
+                                >
+                                    Remove
                                 </UButton>
                             </div>                           
                         </template>
@@ -42,6 +52,7 @@ interface Props {
 
 type Emits = {
     edit: [card: DashboardCardType]
+    remove: [cardId: DashboardCardType['id']]
 }
 
 const props = defineProps<Props>()
@@ -49,8 +60,12 @@ const emit = defineEmits<Emits>()
 
 const cardRouterPath = computed(() => `${route.path}/${props.card.id}`)
 
-const handleCardModalOpen = (): void => {
+const handleCardEdit = (): void => {
     emit('edit', props.card)
+}
+
+const handleCardRemove = (): void => {
+    emit('remove', props.card.id)
 }
 </script>
 
@@ -68,6 +83,11 @@ const handleCardModalOpen = (): void => {
     &__actions {
         white-space: nowrap;
         margin-left: 10px;
+    }
+
+    &__popover {
+        display: flex;
+        flex-direction: column;
     }
 }
 </style>

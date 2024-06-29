@@ -1,5 +1,5 @@
 <template>
-    <div v-loading.page="dashboardStore.loading" class="dashboard-table">
+    <div v-loading.page="dashboardStore.loading || dashboardCardStore.loading" class="dashboard-table">
         <div
             v-for="(column, index) in columns"
             :key="index"
@@ -18,6 +18,7 @@
                 draggable="true"
                 @dragstart="handleDragStart($event, card)"
                 @edit="handleCardEdit"
+                @remove="handleCardRemove"
             />
         </div>
     </div>
@@ -35,6 +36,7 @@ interface Props {
 defineProps<Props>()
 
 const dashboardStore = useDashboardStore()
+const dashboardCardStore = useDashboardCardStore()
 
 const editCard = ref<DashboardCardType | null>(null)
 const editModalActive = ref(false)
@@ -61,6 +63,11 @@ const handleDragDrop = async (event: DragEvent, column: DashboardColumnType): Pr
 const handleCardEdit = (card: DashboardCardType): void => {
     editCard.value = card
     editModalActive.value = true
+}
+
+const handleCardRemove = async (cardId: DashboardCardType['id']): Promise<void> => {
+    await dashboardCardStore.removeCard(cardId)
+    await dashboardStore.getDashboardColumns()
 }
 </script>
 

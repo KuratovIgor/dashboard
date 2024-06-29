@@ -5,4 +5,5 @@ export default interface IService {
     getDashboardColumns: (event: H3Event<EventHandlerRequest>) => Promise<unknown>
     updateTaskCardPosition: (event: H3Event<EventHandlerRequest>, cardPosition: DashboardCardPositionType) => Promise<unknown>
     editDashboardCard: (event: H3Event<EventHandlerRequest>, card: DashboardCardType) => Promise<unknown>
+    removeDashboardCard: (event: H3Event<EventHandlerRequest>, cardId: DashboardCardType['id']) => Promise<unknown>
 }

@@ -37,6 +37,12 @@ class SupabaseService implements IService {
 
         await client.from('task_cards').update({title: card.title, description: card.description}).match({id: card.id})
     }
+
+    public async removeDashboardCard(event: H3Event<EventHandlerRequest>, cardId: DashboardCardType['id']): Promise<void> {
+        const client = await serverSupabaseClient<Database>(event)
+
+        await client.from('task_cards').delete().match({id: cardId})
+    }
 }
 
 export default new SupabaseService()
