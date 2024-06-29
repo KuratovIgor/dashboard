@@ -1,5 +1,3 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import type { DashboardColumnType, DashboardCardPositionType } from '@/types/dashboard.types'
 import { DashboardService } from '@/services/dashboard.service'
 

@@ -9,7 +9,7 @@ export default class DashboardController {
         return data
     }
 
-    public static async updateTaskCard(event: H3Event<EventHandlerRequest>, cardPosition: DashboardCardPositionType): Promise<void> {
-        await SupabaseService.updateTaskCard(event, cardPosition)
+    public static async updateTaskCardPosition(event: H3Event<EventHandlerRequest>, cardPosition: DashboardCardPositionType): Promise<void> {
+        await SupabaseService.updateTaskCardPosition(event, cardPosition)
     }
 }

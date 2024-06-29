@@ -1,4 +1,4 @@
-import type { DashboardColumnType, DashboardCardPositionType } from '@/types/dashboard.types'
+import type { DashboardColumnType, DashboardCardPositionType, DashboardCardType } from '@/types/dashboard.types'
 
 export class DashboardService {
     public static async getDashboardColumns() {
@@ -8,6 +8,6 @@ export class DashboardService {
     }
 
     public static async updateDashboardColumns(cardPosition: DashboardCardPositionType) {
-        await $fetch<DashboardColumnType[]>('/api/dashboard', { method: 'POST', body: cardPosition })
+        await $fetch('/api/dashboard', { method: 'POST', body: cardPosition })
     }
 }
