@@ -5,14 +5,24 @@
                 <div class="dashboard-card__header">
                     <div>{{ card.title }}</div>
 
-                    <UButton
-                        icon="i-heroicons-pencil-square"
-                        size="sm"
-                        color="amber"
-                        square
-                        variant="ghost"
-                        @click="handleCardModalOpen"
-                    />
+                    <UPopover mode="hover">
+                        <UButton variant="link" color="black">. . .</UButton>
+
+                        <template #panel>
+                            <div>
+                                <UButton
+                                    icon="i-heroicons-pencil-square"
+                                    size="xl"
+                                    color="amber"
+                                    square
+                                    variant="link"
+                                    @click="handleCardModalOpen"
+                                >
+                                    Edit
+                                </UButton>
+                            </div>                           
+                        </template>
+                    </UPopover>
                 </div>
             </template>
 
@@ -53,6 +63,11 @@ const handleCardModalOpen = (): void => {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    &__actions {
+        white-space: nowrap;
+        margin-left: 10px;
     }
 }
 </style>
