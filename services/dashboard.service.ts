@@ -8,6 +8,9 @@ export class DashboardService {
     }
 
     public static async updateDashboardColumns(cardPosition: DashboardCardPositionType) {
-        await $fetch('/api/dashboard', { method: 'POST', body: cardPosition })
+        await $fetch('/api/dashboard', {
+            method: 'PUT',
+            body: cardPosition,
+        })
     }
 }

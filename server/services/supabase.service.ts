@@ -32,10 +32,10 @@ class SupabaseService implements IService {
         await client.from('task_cards').update({column_id: cardPosition.columnId}).match({id: cardPosition.cardId})
     }
 
-    public async editDashboardCard(event: H3Event<EventHandlerRequest>, card: DashboardCardType): Promise<void> {
+    public async editDashboardCard(event: H3Event<EventHandlerRequest>, cardId: DashboardCardType['id'], cardData: Omit<DashboardCardType, 'id'>): Promise<void> {
         const client = await serverSupabaseClient<Database>(event)
 
-        await client.from('task_cards').update({title: card.title, description: card.description}).match({id: card.id})
+        await client.from('task_cards').update({title: cardData.title, description: cardData.description}).match({id: cardId})
     }
 
     public async removeDashboardCard(event: H3Event<EventHandlerRequest>, cardId: DashboardCardType['id']): Promise<void> {
