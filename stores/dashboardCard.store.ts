@@ -1,9 +1,20 @@
 import { DashboardCardService } from '@/services/dashboardCard.service'
-import type { DashboardCardType } from '@/types/dashboard.types'
+import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
 
 export const useDashboardCardStore = defineStore('dashboardCard', () => {
-    const dashboardCard = ref<DashboardCardType | null>()
     const loading = ref(false)
+
+    const createCard = async (columnId: DashboardColumnType['id'], card: DashboardCardType): Promise<void> => {
+        try {
+            loading.value = true
+
+            await DashboardCardService.createCard(columnId, card)
+        } catch {
+            // handle error
+        } finally {
+            loading.value = false
+        }
+    }
 
     const editCard = async (card: DashboardCardType): Promise<void> => {
         try {
@@ -31,6 +42,7 @@ export const useDashboardCardStore = defineStore('dashboardCard', () => {
 
     return {
         loading,
+        createCard,
         editCard,
         removeCard,
     }

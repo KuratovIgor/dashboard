@@ -5,13 +5,13 @@
                 <h1>Edit Dashboard Card</h1>
             </template>
 
-            <UForm class="dashboard-form" :state="cardState" @submit="handleFormSubmit">
-                <UFormGroup class="mb-5" label="Title" name="title">
-                    <UInput v-model="cardState.title" placeholder="card title" icon="i-heroicons-pencil-solid" />
+            <UForm class="dashboard-form" :validate="formValidate" :state="formState" @submit="handleFormSubmit">
+                <UFormGroup class="mb-5" label="Title" :name="FormField.title">
+                    <UInput v-model="formState.title" placeholder="card title" icon="i-heroicons-pencil-solid" />
                 </UFormGroup>
 
-                <UFormGroup class="mb-10" label="Description" name="description">
-                    <UTextarea v-model="cardState.description" placeholder="card description" autoresize />
+                <UFormGroup class="mb-10" label="Description" :name="FormField.description">
+                    <UTextarea v-model="formState.description" placeholder="card description" autoresize />
                 </UFormGroup>
 
                 <div class="dashboard-form__button">
@@ -29,29 +29,47 @@
 </template>
 
 <script setup lang="ts">
+import type { FormError } from '#ui/types'
+import FormValidate from '@/utils/validate'
 import type { DashboardCardType } from '@/types/dashboard.types'
 
 const modelValue = defineModel<boolean>()
 
+enum FormField {
+    title = 'title',
+    description = 'description',
+}
+
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
-const cardState = reactive<DashboardCardType>({
+const formState = reactive<DashboardCardType>({
     id: '',
     title: '',
     description: ''
 })
 
+const formValidate = (state: unknown): FormError[] => {
+    const formState = state as DashboardCardType
+
+    const requiredErrors = FormValidate.required<typeof FormField>({
+        title: formState.title,
+        description: formState.description,
+    })
+
+    return requiredErrors
+}
+
 const open = (card: DashboardCardType): void => {
     modelValue.value = true
 
-    cardState.id = card.id || ''
-    cardState.title = card.title || ''
-    cardState.description = card.description || ''
+    formState.id = card.id || ''
+    formState.title = card.title || ''
+    formState.description = card.description || ''
 }
 
 const handleFormSubmit = async (): Promise<void> => {
-    await dashboardCardStore.editCard(cardState)
+    await dashboardCardStore.editCard(formState)
 
     modelValue.value = false
 

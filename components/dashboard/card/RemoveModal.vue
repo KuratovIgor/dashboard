@@ -17,7 +17,6 @@
 
                 <UButton
                     icon="i-heroicons-x-mark"
-                    color="primary"
                     @click="handleModalClose"
                 >
                     Cancel

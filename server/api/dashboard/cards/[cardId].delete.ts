@@ -4,9 +4,7 @@ import DashboardCardController from '@/server/controllers/dashboardCard.controll
 export default defineEventHandler(async (event: H3Event<EventHandlerRequest>) => {
     const params = event.context?.params
 
-    if (!params) {
-        return
-    }
+    if (!params) return
 
     await DashboardCardController.removeCard(event, params.cardId)
 })

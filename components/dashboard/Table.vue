@@ -28,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import type { DashboardCardEditModal, DashboardCardRemoveModal } from '#build/components';
-import { useDashboardDrag } from '@/composables/useDashboardDrag';
+import type { DashboardCardEditModal, DashboardCardRemoveModal } from '#build/components'
+import { useDashboardDrag } from '@/composables/useDashboardDrag'
 import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
 
 interface Props {
