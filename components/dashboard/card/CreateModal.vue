@@ -5,7 +5,7 @@
                 <h1>Create Dashboard Card</h1>
             </template>
 
-            <UForm class="dashboard-form" :validate="formValidate" :state="formState" @submit="handleFormSubmit">
+            <UForm ref="form" class="dashboard-form" :validate="formValidate" :state="formState" @submit="handleFormSubmit">
                 <UFormGroup class="mb-5" label="Title" :name="FormField.title">
                     <UInput v-model="formState.card.title" placeholder="card title" icon="i-heroicons-pencil-solid" />
                 </UFormGroup>
@@ -53,6 +53,8 @@ enum FormField {
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
+const form = ref()
+
 const columnTypeOptions = ref<DashboardColumnType['title'][]>([])
 
 const formState = reactive<FormState>({
@@ -64,16 +66,12 @@ const formState = reactive<FormState>({
     }
 })
 
-const formValidate = (state: unknown): FormError[] => {
-    const formState = state as FormState
-
-    const requiredErrors = FormValidate.required<typeof FormField>({
-        status: formState.status,
-        title: formState.card.title,
-        description: formState.card.description,
+const formValidate = (state: FormState): FormError[] => {
+    return FormValidate.validate<typeof FormField>({
+        status: [state.status, { required: true }],
+        title: [state.card.title, { required: true }],
+        description: [state.card.description, { required: true }],
     })
-
-    return requiredErrors
 }
 
 const open = (): void => {
@@ -88,18 +86,23 @@ const setColumnTypeOptions = (): void => {
     }
 }
 
-const handleFormSubmit = async (): Promise<void> => {
-    if (!dashboardStore.dashboardColumns) return
+const resetFormState = (): void => {
+    formState.status = ''
+    formState.card.id = ''
+    formState.card.title = ''
+    formState.card.description = ''
+}
 
-    const columnId = dashboardStore.dashboardColumns.find((column) => column.title === formState.status)?.id
+const handleFormSubmit = async (): Promise<void> => {
+    const columnId = dashboardStore.dashboardColumns?.find((column) => column.title === formState.status)?.id
 
     if (!columnId) return
 
     await dashboardCardStore.createCard(columnId, formState.card)
+    dashboardStore.getDashboardColumns()
 
     modelValue.value = false
-
-    await dashboardStore.getDashboardColumns()
+    resetFormState()
 }
 
 defineExpose({

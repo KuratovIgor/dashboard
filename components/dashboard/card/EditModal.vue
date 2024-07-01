@@ -49,15 +49,11 @@ const formState = reactive<DashboardCardType>({
     description: ''
 })
 
-const formValidate = (state: unknown): FormError[] => {
-    const formState = state as DashboardCardType
-
-    const requiredErrors = FormValidate.required<typeof FormField>({
-        title: formState.title,
-        description: formState.description,
+const formValidate = (state: DashboardCardType): FormError[] => {
+    return FormValidate.validate<typeof FormField>({
+        title: [state.title, { required: true }],
+        description: [state.description, { required: true }],
     })
-
-    return requiredErrors
 }
 
 const open = (card: DashboardCardType): void => {
@@ -70,10 +66,9 @@ const open = (card: DashboardCardType): void => {
 
 const handleFormSubmit = async (): Promise<void> => {
     await dashboardCardStore.editCard(formState)
+    dashboardStore.getDashboardColumns()
 
     modelValue.value = false
-
-    await dashboardStore.getDashboardColumns()
 }
 
 defineExpose({
