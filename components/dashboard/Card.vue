@@ -9,13 +9,13 @@
                         <UButton
                             variant="link"
                             color="black" 
-                            icon="i-heroicons-ellipsis-horizontal-solid"
+                            :icon="Icon.ellipsis"
                         />
 
                         <template #panel>
                             <div class="dashboard-card__popover">
                                 <UButton
-                                    icon="i-heroicons-pencil-square"
+                                    :icon="Icon.pencil"
                                     color="amber"
                                     size="xl"
                                     variant="link"
@@ -25,7 +25,7 @@
                                 </UButton>
 
                                 <UButton
-                                    icon="i-heroicons-pencil-square"
+                                    :icon="Icon.trash"
                                     color="red"
                                     size="xl"
                                     variant="link"
@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@/common/constants'
 import type { DashboardCardType } from '@/types/dashboard.types'
 
 interface Props {

@@ -4,7 +4,7 @@ export const useNotification = () => {
     const showSuccessNotification = (text: string) => {
         toast.add({
             title: text,
-            icon: 'i-heroicons-check',
+            icon: 'i-heroicons-check-circle-16-solid',
             timeout: 2000,
         })
     }

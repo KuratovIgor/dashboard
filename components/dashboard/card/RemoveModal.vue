@@ -8,7 +8,7 @@
             <div class="remove-modal__buttons">
                 <UButton
                     :loading="dashboardCardStore.loading" 
-                    icon="i-heroicons-trash"
+                    :icon="Icon.trash"
                     color="red"
                     @click="handleRemovingConfirm"
                 >
@@ -16,7 +16,7 @@
                 </UButton>
 
                 <UButton
-                    icon="i-heroicons-x-mark"
+                    :icon="Icon.xMark"
                     @click="handleModalClose"
                 >
                     Cancel
@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@/common/constants'
 import type { DashboardCardType } from '@/types/dashboard.types'
 
 const modelValue = defineModel<boolean>()

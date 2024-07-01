@@ -7,7 +7,7 @@
 
             <UForm class="dashboard-form" :validate="formValidate" :state="formState" @submit="handleFormSubmit">
                 <UFormGroup class="mb-5" label="Title" :name="FormField.title">
-                    <UInput v-model="formState.title" placeholder="card title" icon="i-heroicons-pencil-solid" />
+                    <UInput v-model="formState.title" placeholder="card title" :icon="Icon.pencil" />
                 </UFormGroup>
 
                 <UFormGroup class="mb-10" label="Description" :name="FormField.description">
@@ -17,7 +17,7 @@
                 <div class="dashboard-form__button">
                     <UButton
                         :loading="dashboardCardStore.loading" 
-                        icon="i-heroicons-pencil-square"
+                        :icon="Icon.success"
                         type="submit"
                     >
                         Save
@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import type { FormError } from '#ui/types'
+import { Icon } from '@/common/constants'
 import FormValidate from '@/utils/validate'
 import type { DashboardCardType } from '@/types/dashboard.types'
 

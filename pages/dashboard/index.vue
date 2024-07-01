@@ -3,10 +3,7 @@
         <div class="dashboard-page__header">
             <h1>Dashboard</h1>
 
-            <UButton
-                icon="i-heroicons-plus-circle"
-                @click="handleCreateModalOpen"
-            >
+            <UButton :icon="Icon.plusCircle" @click="handleCreateModalOpen">
                 Create task card
             </UButton>
         </div>
@@ -20,6 +17,7 @@
 
 <script setup lang="ts">
 import type { DashboardCardCreateModal } from '#build/components'
+import { Icon } from '@/common/constants'
 
 const dashboardStore = useDashboardStore()
 
