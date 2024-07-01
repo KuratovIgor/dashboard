@@ -43,6 +43,8 @@ enum FormField {
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
+const { showSuccessNotification } = useNotification()
+
 const formState = reactive<DashboardCardType>({
     id: '',
     title: '',
@@ -69,6 +71,8 @@ const handleFormSubmit = async (): Promise<void> => {
     dashboardStore.getDashboardColumns()
 
     modelValue.value = false
+
+    showSuccessNotification('Card edited successfully')
 }
 
 defineExpose({

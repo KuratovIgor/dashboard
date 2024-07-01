@@ -53,6 +53,8 @@ enum FormField {
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
+const { showSuccessNotification } = useNotification()
+
 const form = ref()
 
 const columnTypeOptions = ref<DashboardColumnType['title'][]>([])
@@ -103,6 +105,8 @@ const handleFormSubmit = async (): Promise<void> => {
 
     modelValue.value = false
     resetFormState()
+
+    showSuccessNotification('Card created successfully')
 }
 
 defineExpose({

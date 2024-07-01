@@ -34,6 +34,8 @@ const modelValue = defineModel<boolean>()
 const dashboardStore = useDashboardStore()
 const dashboardCardStore = useDashboardCardStore()
 
+const { showSuccessNotification } = useNotification()
+
 let dashboardCardId: DashboardCardType['id'] = ''
 
 const open = (cardId: DashboardCardType['id']): void => {
@@ -43,10 +45,11 @@ const open = (cardId: DashboardCardType['id']): void => {
 
 const handleRemovingConfirm = async (): Promise<void> => {
     await dashboardCardStore.removeCard(dashboardCardId)
+    dashboardStore.getDashboardColumns()
 
     modelValue.value = false
 
-    await dashboardStore.getDashboardColumns()
+    showSuccessNotification('Card removed successfully')
 } 
 
 const handleModalClose = (): void => {
