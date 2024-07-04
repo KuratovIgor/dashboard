@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import CookieUtil from '@/utils/cookie'
 import { Icon } from '@/common/constants'
 
 const router = useRouter()
@@ -44,6 +45,9 @@ const handleUserLogout = async (): Promise<void> => {
         return
     }
 
+    CookieUtil.removeCookie('accessToken')
+    CookieUtil.removeCookie('userId')
+    
     router.push('/login')
 }
 </script>

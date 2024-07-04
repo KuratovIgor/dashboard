@@ -10,4 +10,10 @@ export default class CookieUtil {
 
         return cookie.value ?? ''
     }
+
+    public static removeCookie(key: string) {
+        const cookie = useCookie(key)
+
+        cookie.value = null
+    }
 }

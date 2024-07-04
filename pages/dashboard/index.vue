@@ -19,6 +19,10 @@
 import type { DashboardCardCreateModal } from '#build/components'
 import { Icon } from '@/common/constants'
 
+definePageMeta({
+    middleware: 'check-auth-zone',
+})
+
 const dashboardStore = useDashboardStore()
 
 const cardCreateModalRef = ref<InstanceType<typeof DashboardCardCreateModal> | null>(null)
