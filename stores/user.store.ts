@@ -7,53 +7,31 @@ export const useUserStore = defineStore('user', () => {
     const loading = ref(false)
 
     const getMe = async (): Promise<void> => {
-        try {
-            user.value = await UserService.getMe()
-        } catch {
-            // handle error
-        }
+        user.value = await UserService.getMe()
     }
 
     const signUpUser = async (signUpData: SignUpType): Promise<boolean> => {
-        try {
-            loading.value = true
+        loading.value = true
 
-            const response = await UserService.signUp(signUpData)
+        const response = await UserService.signUp(signUpData)
 
-            if (response) return true
-        } catch {
-            return false
-        } finally {
-            loading.value = false
-        }
+        loading.value = false
 
-        return false
+        return response
     }
 
     const loginUser = async (loginData: LoginType): Promise<LoginResponseType | null> => {
-        try {
-            loading.value = true
+        loading.value = true
 
-            const response = await UserService.login(loginData)
+        const response = await UserService.login(loginData)
 
-            if (response) return response
-        } catch {
-            return null
-        } finally {
-            loading.value = false
-        }
+        loading.value = false
 
-        return null
+        return response
     }
 
     const logout = async (): Promise<boolean> => {
-        try {
-            const response = await UserService.logout()
-
-            return response
-        } catch {
-            return false
-        }
+        return await UserService.logout()
     }
 
     return {

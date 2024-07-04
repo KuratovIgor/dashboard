@@ -13,7 +13,7 @@ class SupabaseService implements IService {
         
         const { data, error } = await client.auth.getUser(token)
 
-        if (error) return null
+        if (error) throw error
 
         return data.user.user_metadata as UserType
 
@@ -32,14 +32,14 @@ class SupabaseService implements IService {
             },
         })
 
-        if (signUpError) return false
+        if (signUpError) throw signUpError
 
         const { error: insertError } = await client.from('profiles').insert({
             id: userData.user?.id,
             ...userInfo
         })
 
-        if (insertError) return false
+        if (insertError) throw insertError
 
         return true
     }
@@ -49,7 +49,7 @@ class SupabaseService implements IService {
 
         const { data, error } = await client.auth.signInWithPassword(loginData)
 
-        if (error) return null
+        if (error) throw error
 
         return {
             accessToken: data.session.access_token,
@@ -62,7 +62,7 @@ class SupabaseService implements IService {
 
         const { error } = await client.auth.signOut()
 
-        if (error) return false
+        if (error) throw error
 
         return true
     }

@@ -5,5 +5,9 @@ import UserController from '@/server/controllers/user.controller'
 export default defineEventHandler(async (event: H3Event<EventHandlerRequest>) => {
     const body = await readBody<LoginType>(event)
 
-    return await UserController.login(event, body)
+    try {
+        return await UserController.login(event, body)
+    } catch {
+        return null
+    }
 })
