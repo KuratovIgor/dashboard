@@ -18,19 +18,19 @@ export interface Database {
             description: string | null
           }
         },
-        dashboardColumns: {
-            Row: {
-                id: string | null
-                title: string | null
-              }
-              Insert: {
-                id: string | null
-                title: string | null
-              }
-              Update: {
-                id: string | null
-                title: string | null
-              }
+        dashboard_columns: {
+          Row: {
+            id: string | null
+            title: string | null
+          }
+          Insert: {
+            id: string | null
+            title: string | null
+          }
+          Update: {
+            id: string | null
+            title: string | null
+          }
         }
       }
     }

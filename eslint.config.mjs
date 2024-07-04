@@ -12,6 +12,7 @@ export default withNuxt(
       'vue/no-async-in-computed-properties': ['error'],
       'vue/comma-spacing': ['error'],
       'vue/array-bracket-spacing': ['error'],
+      '@typescript-eslint/no-extraneous-class': ['off'],
     },
   }
 )

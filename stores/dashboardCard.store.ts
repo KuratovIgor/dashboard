@@ -1,5 +1,5 @@
-import { DashboardCardService } from '@/services/dashboardCard.service'
 import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
+import { DashboardCardService } from '@/services/dashboardCard.service'
 
 export const useDashboardCardStore = defineStore('dashboardCard', () => {
     const loading = ref(false)

@@ -29,10 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import type { FormError } from '#ui/types'
-import { Icon } from '@/common/constants'
-import FormValidate from '@/utils/validate'
 import type { DashboardCardType } from '@/types/dashboard.types'
+import type { FormError } from '#ui/types'
+import FormValidate from '@/utils/validate'
+import { Icon } from '@/common/constants'
 
 const modelValue = defineModel<boolean>()
 

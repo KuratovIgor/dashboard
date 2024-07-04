@@ -1,6 +1,6 @@
+import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
 import type { EventHandlerRequest, H3Event } from 'h3'
 import DashboardCardController from '@/server/controllers/dashboardCard.controller'
-import { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
 
 export default defineEventHandler(async (event: H3Event<EventHandlerRequest>) => {
     const params = event.context?.params

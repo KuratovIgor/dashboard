@@ -1,4 +1,4 @@
-import type { DashboardColumnType, DashboardCardPositionType, DashboardCardType } from '@/types/dashboard.types'
+import type { DashboardCardPositionType, DashboardColumnType } from '@/types/dashboard.types'
 
 export class DashboardService {
     public static async getDashboardColumns() {

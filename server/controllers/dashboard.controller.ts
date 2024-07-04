@@ -1,10 +1,10 @@
+import type { DashboardCardPositionType, DashboardColumnType } from '@/types/dashboard.types'
 import type { EventHandlerRequest, H3Event } from 'h3'
 import SupabaseService from '@/server/services/supabase.service'
-import type { DashboardColumnType, DashboardCardPositionType } from '@/types/dashboard.types'
 
 export default class DashboardController {
-    public static async getDashboardColumns(event: H3Event<EventHandlerRequest>): Promise<DashboardColumnType[]> {
-        const data = await SupabaseService.getDashboardColumns(event)
+    public static async getDashboardColumns(event: H3Event<EventHandlerRequest>, userId: string): Promise<DashboardColumnType[]> {
+        const data = await SupabaseService.getDashboardColumns(event, userId)
     
         return data
     }

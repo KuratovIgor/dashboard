@@ -1,4 +1,4 @@
-import type { DashboardColumnType, DashboardCardPositionType } from '@/types/dashboard.types'
+import type { DashboardCardPositionType, DashboardColumnType } from '@/types/dashboard.types'
 import { DashboardService } from '@/services/dashboard.service'
 
 export const useDashboardStore = defineStore('dashboardStore', () => {

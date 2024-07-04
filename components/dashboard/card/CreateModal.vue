@@ -33,10 +33,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { FormError } from '#ui/types'
-import { Icon } from '@/common/constants'
-import FormValidate from '@/utils/validate'
 import type { DashboardCardType, DashboardColumnType } from '@/types/dashboard.types'
+import type { FormError } from '#ui/types'
+import FormValidate from '@/utils/validate'
+import { Icon } from '@/common/constants'
 
 interface FormState {
     status: DashboardColumnType['title']

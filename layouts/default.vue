@@ -1,6 +1,16 @@
 <template>
     <div class="default-container">
-        <UVerticalNavigation class="sidebar" :links="links" />
+        <div class="sidebar">
+            <UVerticalNavigation :links="links" />
+            <UButton
+                class="sidebar__button"
+                :icon="Icon.logout"
+                color="rose"
+                @click="handleUserLogout"
+            >
+                Sign Out
+            </UButton>
+        </div>
 
         <UDivider orientation="vertical" />
 
@@ -11,11 +21,31 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@/common/constants'
+
+const router = useRouter()
+
+const userStore = useUserStore()
+
+const { showErrorNotification } = useNotification()
+
 const links = [{
     label: 'Dashboard',
-    icon: 'i-heroicons-squares-2x2-solid',
+    icon: Icon.squares,
     to: '/dashboard'
-  }]
+}]
+
+const handleUserLogout = async (): Promise<void> => {
+    const isSignedOut = userStore.logout()
+
+    if (!isSignedOut) {
+        showErrorNotification('Logout is failed')
+
+        return
+    }
+
+    router.push('/login')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -24,6 +54,9 @@ const links = [{
 }
 
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 10px;
     width: 100%;
     max-width: 250px;
